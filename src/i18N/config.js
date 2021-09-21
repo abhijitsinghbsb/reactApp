@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next";
 
 i18n.use(initReactI18next).init({
   fallbackLng: "en",
-  lng: "en",
+  lng: localStorage.getItem("selectedLang"),
   resources: {
     en: {
       translations: require("./locales/en/translations.json"),
@@ -11,11 +11,14 @@ i18n.use(initReactI18next).init({
     es: {
       translations: require("./locales/es/translations.json"),
     },
+    de: {
+      translations: require("./locales/de/translations.json"),
+    },
   },
   ns: ["translations"],
   defaultNS: "translations",
 });
 
-i18n.languages = ["en", "es"];
+i18n.languages = ["en", "es", "de"];
 
 export default i18n;
