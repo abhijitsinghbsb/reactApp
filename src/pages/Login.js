@@ -65,6 +65,14 @@ export default function Login() {
             >
               Emphasized Button
             </SAPButton>
+            <SAPButton
+              option="emphasized"
+              onClick={() => {
+                alert("testing deployment");
+              }}
+            >
+              Testing Deployment Button
+            </SAPButton>
           </Grid>
         </Grid>
       </form>
