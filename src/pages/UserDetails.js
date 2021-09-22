@@ -6,7 +6,7 @@ export default function UserDetails() {
     <>
       Navigated to this page on deleting a record..
       <Link to="/users">
-        <Button variant="contained">Go to Users Page</Button>
+        <Button variant="contained">Go to Users Page using Link</Button>
       </Link>
     </>
   );

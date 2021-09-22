@@ -139,18 +139,18 @@ export default function Users() {
                   >
                     Delete + Navigate
                   </Button>
-                  <Button
-                    onClick={() => {
-                      history.push("/userdetails");
-                    }}
-                  >
-                    Navigate using History
-                  </Button>
                 </Link>
               </li>
             );
           })}
       </ul>
+      <Button
+        onClick={() => {
+          history.push("/userdetails");
+        }}
+      >
+        Navigate using History Push
+      </Button>
     </>
   );
 }
