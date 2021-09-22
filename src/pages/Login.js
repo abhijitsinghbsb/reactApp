@@ -76,6 +76,8 @@ export default function Login() {
           </Grid>
         </Grid>
       </form>
+
+      <img src="https://static.toiimg.com/thumb/msid-79225554,imgsize-856858,width-400,resizemode-4/79225554.jpg" />
     </>
   );
 }
