@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: serve-webapp
+  name: serve-webapp
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: serve-webapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: serve-webapp
+    spec:
+      containers:
+      - image: registryfrontendabhi2802.azurecr.io/react-serve-ui:latest
+        name: webapp
+        imagePullPolicy: Always
+        resources: {}
+        ports:
+          - containerPort: 3000 
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: serve-webapp
+  labels:
+    run: serve-webapp
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+  selector:
+    app: serve-webapp
+  type: LoadBalancer

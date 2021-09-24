@@ -1,0 +1,74 @@
+Working with Docker - React
+
+https://medium.com/@blair.v/deploying-create-react-app-to-azure-web-app-service-2ce7871fcbe
+
+docker build -f "Dockerfile" --tag myapp .
+docker run --rm -p 3000:3000 myapp
+
+
+https://medium.com/bb-tutorials-and-thoughts/azure-deploying-react-app-with-nginx-on-aks-76bb3a206cde
+- Docker + k8s + nginx replaced by serve
+- Use docker file from 1st link
+docker build -t react-serve-ui .
+docker run -d --name react-serve-webapp -p 3002:3000 react-serve-ui
+
+az login
+az acr login --name registryfrontendabhi2802
+docker login registryfrontendabhi2802.azurecr.io
+
+docker login registryfrontendabhi2802.azurecr.io -u registryfrontendabhi2802 -p 03pjg/W66GJd4oRy0wYbvhsHBnXohAW2
+
+// create a resource group
+az group create --name k8s-demo-abhi2802 --location westus
+//// az group create --name k8s-demo --location westus
+
+// create a container registry
+az acr create --resource-group k8s-demo-abhi2802 --name registryfrontendabhi2802 --sku Basic
+
+docker tag react-serve-ui registryfrontendabhi2802.azurecr.io/react-serve-ui
+docker push registryfrontendabhi2802.azurecr.io/react-serve-ui
+
+///// az acr build --image registryfrontendabhi2802/react-serve-ui-abhi2802:v1 --registry registryfrontendabhi2802 --file Dockerfile .
+
+az aks create --resource-group k8s-demo-abhi2802 --name frontend-cluster --node-count 2 --enable-addons monitoring --generate-ssh-keys
+
+az aks install-cli
+
+az aks get-credentials --resource-group k8s-demo-abhi2802 --name frontend-cluster
+
+kubectl config get-contexts
+
+kubectl config current-context
+
+kubectl get nodes
+
+az aks update -n frontend-cluster -g k8s-demo-abhi2802 --attach-acr registryfrontendabhi2802
+
+touch manifest.yml
+
+kubectl create -f manifest.yml
+
+// list the deployment
+kubectl get deploy
+
+// list the pods
+kubectl get pods
+
+// list the service
+kubectl get svc
+
+
+DELETE THE RESOURCE GROUP
+az group delete --name k8s-demo-abhi2802
+
+
+
+
+Resource Group -> Container Registry -> Repository
+Cluster -> NodePool -> Nodes -> Pods
+
+Docker but no K8s
+https://medium.com/bb-tutorials-and-thoughts/how-to-serve-react-application-with-nginx-and-docker-9c51ac2c50ba
+
+
+https://docs.microsoft.com/en-in/azure/container-registry/container-registry-get-started-docker-cli?tabs=azure-cli
